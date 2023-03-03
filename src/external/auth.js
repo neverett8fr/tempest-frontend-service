@@ -4,15 +4,30 @@ import axios from "axios"
 
 function callService() {
 
-    const addr = getConfig().gatewayService.host + "/routes"
+    const addr = getConfig().gatewayService.host + "/administration-service/token"
     alert(addr)
 
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    axios.get(addr)
+    const headers = {
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "*"
+    }
+
+    const body = {
+        "username": username,
+        "password": password
+    }
+
+    axios({
+        method: "POST",
+        url: addr,
+        withCredentials: false,
+        headers: headers,
+        data: body
+    })
         .then(function (response) {
-            store.token = response
+            store.token = response.data
             alert(store.token)
-        })
+        }).catch()
 
 
     return ""
