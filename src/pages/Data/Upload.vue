@@ -21,7 +21,7 @@ export default {
             console.log(store)
             store.files.push(
                 {
-                    name: "tempNmae",
+                    name: "tempName",
                     extension: "txt",
                     thumbnail: ""
                 }
