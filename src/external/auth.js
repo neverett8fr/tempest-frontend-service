@@ -2,7 +2,7 @@ import { getConfig } from "../config/config"
 import { store } from '../store/store'
 import axios from "axios"
 
-function callService() {
+function callService(username, password) {
 
     const addr = getConfig().gatewayService.host + "/administration-service/token"
     alert(addr)
@@ -39,7 +39,7 @@ export function getToken(username, password) {
 
     if (username != "") {
 
-        const tok = callService()
+        const tok = callService(username, password)
 
         return tok
     }
