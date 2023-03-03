@@ -8,7 +8,8 @@ RUN npm install --save --legacy-peer-deps
 # copy project directory to the working directory
 COPY . .
 # build app
-RUN npm run build# production stage
+RUN npm run build
+# production stage
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage dist /usr/share/nginx/html
 # specify port to access webapp through
