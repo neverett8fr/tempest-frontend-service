@@ -14,4 +14,4 @@ FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage dist /usr/share/nginx/html
 # specify port to access webapp through
 EXPOSE 8080
-CMD [ "public", "dist", "-p", "8080"]
+CMD ["dist", "-p", "8080"]
