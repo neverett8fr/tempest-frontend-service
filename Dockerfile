@@ -15,4 +15,4 @@ COPY --from=build-stage dist /usr/share/nginx/html
 # specify port to access webapp through
 EXPOSE 8080
 # CMD [ "http-server", "dist", "-p", "8080"]
-CMD [ "app" ]
+ENTRYPOINT [ "public" ]
