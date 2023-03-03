@@ -9,7 +9,8 @@ RUN npm install --save --legacy-peer-deps
 COPY . .
 # build app
 RUN npm run build# production stage
-FROM nginx:stable-alpine as production-stageCOPY --from=build-stage dist /usr/share/nginx/html
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage dist /usr/share/nginx/html
 # specify port to access webapp through
 EXPOSE 8080
 CMD [ "http-server", "dist", "-p", "8080"]
