@@ -2,7 +2,6 @@ const webpack = require('webpack');
 
 module.exports = {
   lintOnSave: false,
-  publicPath: process.env.NODE_ENV === "production" ? "/tempest-frontend-service/" : "/",
   configureWebpack: {
     // Set up all the aliases we use in our app.
     resolve: {
