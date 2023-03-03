@@ -1,18 +1,23 @@
-# build stage
-FROM node:14 as build-stage
-WORKDIR .
-# copy package.json and package-lock.json (for more details on why we copy both these files and the project files and folders check this link out.
+# Choose the Image which has Node installed already
+FROM node:lts-alpine
+
+# install simple http server for serving static content
+RUN npm install -g http-server
+
+# make the 'app' folder the current working directory
+WORKDIR /app
+
+# copy both 'package.json' and 'package-lock.json' (if available)
 COPY package*.json ./
+
 # install project dependencies
 RUN npm install --save --legacy-peer-deps
-# copy project directory to the working directory
+
+# copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
-# build app
+
+# build app for production with minification
 RUN npm run build
-# production stage
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage dist /usr/share/nginx/html
-# specify port to access webapp through
+
 EXPOSE 8080
-# CMD [ "http-server", "dist", "-p", "8080"]
-CMD ["npm run serve"]
+CMD [ "http-server", "dist" ]
