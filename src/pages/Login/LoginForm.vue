@@ -15,22 +15,28 @@
         <div class="row">
             <div class="col-md-6">
                 <base-button @click="getTok(user, pass)" slot="footer" type="primary" fill>Login</base-button>
-                <base-button slot="footer" fill>Create Account</base-button>
+                <base-button @click="createUser(user, pass)" slot="footer" fill>Create Account</base-button>
             </div>
         </div>
     </card>
 </template>
 <script>
 
-import { getToken } from '../../external/auth';
+import { getToken, createUser } from '../../external/auth';
 import { store } from '../../store/store';
+import { BaseAlert } from '@/components';
+import NotificationUserCreated from '../Notifications/NotificationUserCreated.vue';
 
 export default {
+    components: {
+        BaseAlert
+    },
     data() {
         return {
             user: "",
             pass: "",
             store: store,
+            type: ["", "info", "success", "warning", "danger"]
         }
     },
     props: {
@@ -45,6 +51,23 @@ export default {
         getTok(user, pass) {
             var tok = getToken(user, pass);
             store.token = tok;
+        },
+        createUser(user, pass) {
+            var msg = createUser(user, pass)
+            store.user.username = user
+            console.log(msg)
+
+            const color = Math.floor(Math.random() * 4 + 1);
+            this.$notify({
+                component: NotificationUserCreated,
+                icon: "tim-icons icon-bell-55",
+                horizontalAlign: 'top',
+                verticalAlign: 'right',
+                type: this.type[color],
+                timeout: 0
+            });
+
+
         }
     }
 };
