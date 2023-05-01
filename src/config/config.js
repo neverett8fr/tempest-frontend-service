@@ -4,7 +4,7 @@
 export function getConfig() {
     return {
         gatewayService: {
-            host: "http://localhost:8083",
+            host: "http://localhost:8082",
             port: "",
         }
     }
