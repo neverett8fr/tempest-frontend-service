@@ -9,7 +9,7 @@ module.exports = {
         'chart.js': 'chart.js/dist/Chart.js'
       },
       fallback: {
-        "fs": false,
+        path: require.resolve("path-browserify")
       }
     },
     plugins: [

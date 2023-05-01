@@ -19,13 +19,13 @@ export default {
     methods: {
         temp() {
             console.log(store)
-            store.files.push(
-                {
-                    name: "tempName",
-                    extension: "txt",
-                    thumbnail: ""
-                }
-            )
+            // store.files.push(
+            //     {
+            //         name: "tempName",
+            //         extension: "txt",
+            //         thumbnail: ""
+            //     }
+            // )
         }
     }
 }

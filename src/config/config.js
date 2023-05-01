@@ -4,7 +4,7 @@
 export function getConfig() {
     return {
         gatewayService: {
-            host: "https://tempest-gateway-service-production-fbfhaod2uq-lz.a.run.app",
+            host: "http://localhost:8083",
             port: "",
         }
     }

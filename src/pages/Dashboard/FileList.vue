@@ -2,10 +2,11 @@
     <Card>
         <base-table :data="rows" thead-classes="text-primary">
             <template slot-scope="{row}">
-                <base-button @click="temp({ row })">Download</base-button>
+                <base-button @click="getFile(row.key)">Download</base-button>
                 <td class="td-actions text-right">
-                    <p class="title">{{ row.name }}</p>
-                    <p class="text-muted">{{ row.extension }}</p>
+                    <p class="title">{{ row.metadata.name }}</p>
+                    <p class="text-muted">{{ row.metadata.extension }}</p>
+                    <p class="text-muted">{{ row.key }}</p>
                 </td>
             </template>
         </base-table>
@@ -13,6 +14,7 @@
 </template>
 <script>
 import { BaseTable } from "@/components";
+import { getSpecificFile } from '../../external/data';
 import Card from "../../components/Cards/Card.vue";
 export default {
     components: {
@@ -22,8 +24,8 @@ export default {
     props: {
         rows: [],
     }, methods: {
-        temp(row) {
-            console.log(row.row.name)
+        getFile(key) {
+            getSpecificFile(key)
         }
     }
 }
