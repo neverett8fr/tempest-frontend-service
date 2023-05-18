@@ -24,8 +24,10 @@ export default {
     props: {
         rows: [],
     }, methods: {
-        getFile(key) {
+        async getFile(key) {
             getSpecificFile(key)
+
+
         }
     }
 }

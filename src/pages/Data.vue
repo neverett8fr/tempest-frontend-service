@@ -28,7 +28,9 @@ export default {
     },
     methods: {
         getFiles() {
-            getUserFiles()
+            if (!store.temp_loaded) {
+                getUserFiles();
+            }
         }
     }
 }

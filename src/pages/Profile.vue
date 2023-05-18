@@ -22,7 +22,7 @@ export default {
       model: {
         company: 'Creative Code Inc.',
         email: 'mike@email.com',
-        username: 'michael23',
+        username: "",
         firstName: 'Mike',
         lastName: 'Andrew',
         address: 'Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09',
@@ -31,9 +31,9 @@ export default {
         about: 'Lamborghini Mercy, Your chick she so thirsty, I\'m in that two seat Lambo.'
       },
       user: {
-        fullName: 'Mike Andrew',
-        title: 'Ceo/Co-Founder',
-        description: `Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...`,
+        fullName: 'N/A',
+        title: 'N/A',
+        description: `N/A`,
       }
     }
   }

@@ -1,25 +1,65 @@
 import { store } from '../store/store'
 import axios from "axios"
 
-function callServiceGetSpecificFile(key) {
+async function callServiceGetSpecificFile(key) {
 
     const addr = "http://localhost:8081/data/" + store.user.username + "/" + key
 
     const headers = {
         "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": "Bearer " + store.token,
+        "Accept": "*/*",
+        "Connection": "keep-alive",
+        "Accept-Encoding": "gzip"
     }
 
-    axios({
-        method: "GET",
-        url: addr,
-        withCredentials: false,
-        headers: headers,
-    })
-        .then(function (response) {
-            console.log("download file")
-            store.selectedFile = response.data.data
-        }).catch()
+    // axios({
+    //     method: "GET",
+    //     url: addr,
+    //     withCredentials: false,
+    //     headers: headers,
+    //     responseType: "blob"
+    // })
+    //     .then(function (response) {
+    //         console.log("download file")
+    //         store.selectedFile = response.data
+    //         return store.selectedFile;
+    //     }).catch()
+
+    try {
+        const response = await axios.get(addr, {
+            withCredentials: false,
+            headers: headers,
+            responseType: "blob" // Set the response type to 'blob'
+        });
+
+        console.log("Download file");
+        return response.data; // Return the response data directly
+    } catch (error) {
+        console.error("Error retrieving file:", error);
+        throw error; // Re-throw the error to be handled by the caller
+    }
+
+
+    return store.selectedFile
+}
+export async function getSpecificFile(key) {
+
+    console.log("download function called ", key)
+
+    const response = await callServiceGetSpecificFile(key);
+
+    const blob = new Blob([response]);
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'download_file.jpeg'); // Set the desired file name and extension
+    document.body.appendChild(link);
+    link.click();
+
 
 
     return ""
@@ -29,9 +69,12 @@ function callServiceGetUsersFiles() {
 
     const addr = "http://localhost:8081/data/" + store.user.username
 
+    console.log("get user files function called")
+
     const headers = {
         "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": "Bearer " + store.token
     }
 
     axios({
@@ -41,7 +84,9 @@ function callServiceGetUsersFiles() {
         headers: headers,
     })
         .then(function (response) {
-            store.files = response.data.data
+            console.log("files got ", response)
+            store.files = response.data.data;
+            store.temp_loaded = true;
         }).catch()
 
 
@@ -57,23 +102,44 @@ export function getUserFiles() {
 
     return ""
 }
-export function getSpecificFile(key) {
 
-    console.log("function called")
 
-    callServiceGetSpecificFile(key)
+function callServiceUploadUserFile(fileData) {
 
-    var fs = require('browserify-fs');
+    const addr = "http://localhost:8081/data/" + store.user.username
 
-    const content = 'Some content!';
+    const headers = {
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": "Bearer " + store.token,
+        "Content-Type": "image/jpeg",
+        // "Content-Type": "image/jpeg",
+        "Transfer-Encoding": "chunked"
+    }
 
-    fs.mkdir('/home', function () {
-        fs.writeFile('/home/hello-world.txt', 'Hello world!\n', function () {
-            fs.readFile('/home/hello-world.txt', 'utf-8', function (err, data) {
-                console.log(data);
-            });
-        });
-    });
+    axios({
+        method: "POST",
+        url: addr,
+        withCredentials: false,
+        headers: headers,
+        data: fileData
+    })
+        .then(function (response) {
+            store.temp_loaded = false;
+            console.log(response);
+        }).catch()
+
+
+    return ""
+}
+
+export function uploadFile(key) {
+
+    console.log("upload function called", key)
+
+
+    callServiceUploadUserFile(key);
+
 
 
 

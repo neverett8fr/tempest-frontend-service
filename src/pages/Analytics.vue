@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-12">
         <card type="chart">
           <template slot="header">
@@ -31,9 +31,9 @@
           </div>
         </card>
       </div>
-    </div>
+    </div> -->
     <div class="row">
-      <div class="col-lg-4" :class="{}">
+      <!-- <div class="col-lg-4" :class="{}">
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{ $t('analytics.totalShipments') }}</h5>
@@ -46,12 +46,12 @@
             </line-chart>
           </div>
         </card>
-      </div>
+      </div> -->
       <div class="col-lg-4" :class="{}">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t('analytics.dailySales') }}</h5>
-            <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info "></i> 3,500€</h3>
+            <h5 class="card-category">Data Saved</h5>
+            <h3 class="card-title"><i class="tim-icons icon-upload "></i>Saved 20MB</h3>
           </template>
           <div class="chart-area">
             <bar-chart style="height: 100%" chart-id="blue-bar-chart" :chart-data="blueBarChart.chartData"
@@ -60,7 +60,7 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-4" :class="{}">
+      <!-- <div class="col-lg-4" :class="{}">
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{ $t('analytics.completedTasks') }}</h5>
@@ -72,9 +72,9 @@
             </line-chart>
           </div>
         </card>
-      </div>
+      </div> -->
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-6 col-md-12">
         <card type="tasks" :header-classes="{}">
           <template slot="header">
@@ -101,7 +101,7 @@
           </div>
         </card>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -188,15 +188,15 @@ export default {
       blueBarChart: {
         extraOptions: chartConfigs.barChartOptions,
         chartData: {
-          labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+          labels: ["Uncompressed", "Compressed"],
           datasets: [{
-            label: "Countries",
+            label: "Storage Saved",
             fill: true,
             borderColor: config.colors.info,
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [53, 20, 10, 80, 100, 45],
+            data: [53, 33, 0],
           }]
         },
         gradientColors: config.colors.primaryGradient,

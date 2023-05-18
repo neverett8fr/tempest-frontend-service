@@ -33,13 +33,14 @@
   </div>
 </template>
 <script>
+import { store } from "../../store/store";
 import SidebarLink from "./SidebarLink";
 
 export default {
   props: {
     title: {
       type: String,
-      default: "user_name"
+      default: store.user.username
     },
     backgroundColor: {
       type: String,

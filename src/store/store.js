@@ -11,4 +11,5 @@ export const store = {
         //     thumbnail: "",
         // }
     ],
+    temp_loaded: false,
 }
