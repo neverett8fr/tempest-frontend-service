@@ -60,6 +60,19 @@
           </div>
         </card>
       </div>
+      <div class="col-lg-4" :class="{}">
+        <card type="chart">
+          <template slot="header">
+            <h5 class="card-category">File Types Used</h5>
+            <h3 class="card-title"><i class="tim-icons icon-upload "></i>File Types</h3>
+          </template>
+          <div class="chart-area">
+            <bar-chart style="height: 100%" chart-id="blue-bar-chart" :chart-data="fileTypes.chartData"
+              :gradient-stops="blueBarChart.gradientStops" :extra-options="blueBarChart.extraOptions">
+            </bar-chart>
+          </div>
+        </card>
+      </div>
       <!-- <div class="col-lg-4" :class="{}">
         <card type="chart">
           <template slot="header">
@@ -201,7 +214,24 @@ export default {
         },
         gradientColors: config.colors.primaryGradient,
         gradientStops: [1, 0.4, 0],
-      }
+      },
+      fileTypes: {
+        extraOptions: chartConfigs.barChartOptions,
+        chartData: {
+          labels: ["JPEG", "PNG", "PDF", "Other"],
+          datasets: [{
+            label: "File Types",
+            fill: true,
+            borderColor: config.colors.info,
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: [3, 7, 0, 20],
+          }]
+        },
+        gradientColors: config.colors.primaryGradient,
+        gradientStops: [1, 0.4, 0],
+      },
     }
   },
   computed: {

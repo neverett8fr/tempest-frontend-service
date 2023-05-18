@@ -56,7 +56,7 @@ export async function getSpecificFile(key) {
 
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'download_file.jpeg'); // Set the desired file name and extension
+    link.setAttribute('download', 'download_file'); // Set the desired file name and extension
     document.body.appendChild(link);
     link.click();
 

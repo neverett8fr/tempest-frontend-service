@@ -16,8 +16,8 @@ services:
       interval: 5s
       retries: 5
       timeout: 5s
-    networks:
-      - auth-network
+    # networks:
+    #   - auth-network
     image: postgres:14.5
     restart: always
     environment:
@@ -34,62 +34,64 @@ services:
       - ../tempest-administration-service/db-data/:/var/lib/postgresql/data/
       # copy the sql script to create tables
       - ../tempest-administration-service/db/migrations/0_init.up.sql:/docker-entrypoint-initdb.d/0_init.up.sql
-  data-service:
-    networks:
-      - main-network
-    build:
-      dockerfile: Dockerfile
-      context: ../tempest-data-service-self-hosted
-    ports:
-      - "8081:8081"
-    # environment:
-    #   COMPRESSION_SERVICE_HOST: http://localhost
-    #   COMPRESSION_SERVICE_PORT: 8084
-  auth-service:
-    networks:
-      - main-network
-      - auth-network
-    build:
-      dockerfile: Dockerfile
-      context: ../tempest-administration-service
-    ports:
-      - "8083:8083"
-    depends_on:
-      - db-auth
-    environment:
-      - ADMINISTRATION_DB_HOST=db-auth
-      - ADMINISTRATION_DB_SERVICE_PASS=123LocalDBPass
-      - ADMINISTRATION_DB_PORT=5432
-      - HMAC_SIGNING_KEY=123PassID
-  gateway-service:
-    networks:
-      - main-network
-    environment:
-      - DATA_SERVICE_HOST=http://data-service
-      - DATA_SERVICE_PORT=8081
-      - AUTH_SERVICE_HOST=http://auth-service
-      - AUTH_SERVICE_PORT=8083
-    build:
-      dockerfile: Dockerfile
-      context: ../tempest-gateway-service
-    ports:
-      - "8082:8082"
-    depends_on:
-      - auth-service
-      - data-service
-  front-end-service:
-    networks:
-      - main-network
-    build:
-      dockerfile: Dockerfile
-      context: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - gateway-service
+  # data-service:
+  #   networks:
+  #     - main-network
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ../tempest-data-service-self-hosted
+  #   ports:
+  #     - "8081:8081"
+  #   volumes:
+  #     - /home/neverett8fr/Documents/data:/data
+  #   # environment:
+  #   #   COMPRESSION_SERVICE_HOST: http://localhost
+  #   #   COMPRESSION_SERVICE_PORT: 8084
+  # auth-service:
+  #   networks:
+  #     - main-network
+  #     - auth-network
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ../tempest-administration-service
+  #   ports:
+  #     - "8083:8083"
+  #   depends_on:
+  #     - db-auth
+  #   environment:
+  #     - ADMINISTRATION_DB_HOST=db-auth
+  #     - ADMINISTRATION_DB_SERVICE_PASS=123LocalDBPass
+  #     - ADMINISTRATION_DB_PORT=5432
+  #     - HMAC_SIGNING_KEY=123PassID
+  # gateway-service:
+  #   networks:
+  #     - main-network
+  #   environment:
+  #     - DATA_SERVICE_HOST=http://localhost
+  #     - DATA_SERVICE_PORT=8081
+  #     - AUTH_SERVICE_HOST=http://auth-service
+  #     - AUTH_SERVICE_PORT=8083
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ../tempest-gateway-service
+  #   ports:
+  #     - "8082:8082"
+  #   depends_on:
+  #     - auth-service
+  # data-service    
+  # front-end-service:
+  #   networks:
+  #     - main-network
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: .
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - gateway-service
 
-networks:
-  auth-network:
-    driver: bridge
-  main-network:
-    driver: bridge
+  # networks:
+  #   auth-network:
+  #     driver: bridge
+  #   main-network:
+  #     driver: bridge

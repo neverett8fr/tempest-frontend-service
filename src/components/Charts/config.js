@@ -28,7 +28,7 @@ export let blueChartOptions = {
       },
       ticks: {
         suggestedMin: 60,
-        suggestedMax: 125,
+        suggestedMax: 0,
         padding: 20,
         fontColor: "#2380f7"
       }
@@ -70,8 +70,8 @@ export let purpleChartOptions = {
         zeroLineColor: "transparent",
       },
       ticks: {
-        suggestedMin: 60,
-        suggestedMax: 125,
+        suggestedMin: 0,
+        suggestedMax: 120,
         padding: 20,
         fontColor: "#9a9a9a"
       }
@@ -114,7 +114,7 @@ export let orangeChartOptions = {
       },
       ticks: {
         suggestedMin: 50,
-        suggestedMax: 110,
+        suggestedMax: 60,
         padding: 20,
         fontColor: "#ff8a76"
       }
@@ -157,7 +157,7 @@ export let greenChartOptions = {
       },
       ticks: {
         suggestedMin: 50,
-        suggestedMax: 125,
+        suggestedMax: 60,
         padding: 20,
         fontColor: "#9e9e9e"
       }
@@ -199,8 +199,8 @@ export let barChartOptions = {
         zeroLineColor: "transparent",
       },
       ticks: {
-        suggestedMin: 60,
-        suggestedMax: 120,
+        suggestedMin: 0,
+        suggestedMax: 60,
         padding: 20,
         fontColor: "#9e9e9e"
       }
